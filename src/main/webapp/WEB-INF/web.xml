@@ -9,6 +9,30 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
     
+    <!--配置监听器，为了获取web应用名称（路径）  -->
+    <listener>
+        <listener-class>com.lx.atcrowdfunding.web.ServerStartupListener</listener-class>
+    </listener>
+    
+    <!-- 解决get请求方式乱码问题：在服务器server中的server.xml中的connector添加URIEncoding="UTF-8" -->
+    <!-- 解决post方式乱码问题：增加过滤器：设置编码方式为UTF-8,因为前端页面都设置为utf-8了 -->
+    <filter>
+        <filter-name>encoding</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encoding</filter-name>
+        <servlet-name>springmvc</servlet-name>
+    </filter-mapping>
+    
     <!--集成springmvc框架  -->
     <servlet>
         <servlet-name>springmvc</servlet-name>
